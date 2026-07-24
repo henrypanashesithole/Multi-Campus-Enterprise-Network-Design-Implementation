@@ -12,27 +12,30 @@ This project showcases the design and implementation of an enterprise-grade mult
   - Distribution & Access Layer Switching: Layer 3 switches managing trunk aggregation alongside dedicated Layer 2 access switches for departmental isolation.
   - Cloud Edge & Server Hosting: External Cloud Router interfacing with static DMZ subnets hosting production Email, Web, and FTP enterprise servers.
 
-## Network Architecture & Addressing Scheme
-Subnet & Department Addressing Matrix
+### Subnet & Department Addressing Matrix
 
-Location,Department / Zone,VLAN,Subnet / CIDR,Router Sub-Interface,Dynamic DHCP Pool
-Main Campus,ADMIN,VLAN 10,192.168.1.0/24,Gi0/0.10 (192.168.1.1),ADMIN-POOL
-Main Campus,HR,VLAN 20,192.168.2.0/24,Gi0/0.20 (192.168.2.1),HR-POOL
-Main Campus,FINANCE,VLAN 30,192.168.3.0/24,Gi0/0.30 (192.168.3.1),FINANCE-POOL
-Main Campus,BUSINESS,VLAN 40,192.168.4.0/24,Gi0/0.40 (192.168.4.1),BUSINESS-POOL
-Main Campus,E&C,VLAN 50,192.168.5.0/24,Gi0/0.50 (192.168.5.1),E&C-POOL
-Main Campus,A&D,VLAN 60,192.168.6.0/24,Gi0/0.60 (192.168.6.1),A&D-POOL
-Main Campus,M-STUD-LAB,VLAN 70,192.168.7.0/24,Gi0/0.70 (192.168.7.1),M_STUD_LAB-POOL
-Main Campus,IT-DEPT,VLAN 80,192.168.8.0/24,Gi0/0.80 (192.168.8.1),IT-POOL
-Branch Campus,STAFF,VLAN 90,192.168.9.0/24,Gi0/0.90 (192.168.9.1),STAFF-POOL
-Branch Campus,B-STUD-LAB,VLAN 100,192.168.10.0/24,Gi0/0.100 (192.168.10.1),B_STUD_LAB-POOL
+| Location | Department / Zone | VLAN | Subnet / CIDR | Router Sub-Interface | Dynamic DHCP Pool |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Main Campus** | ADMIN | VLAN 10 | `192.168.1.0/24` | Gi0/0.10 (`192.168.1.1`) | `ADMIN-POOL` |
+| **Main Campus** | HR | VLAN 20 | `192.168.2.0/24` | Gi0/0.20 (`192.168.2.1`) | `HR-POOL` |
+| **Main Campus** | FINANCE | VLAN 30 | `192.168.3.0/24` | Gi0/0.30 (`192.168.3.1`) | `FINANCE-POOL` |
+| **Main Campus** | BUSINESS | VLAN 40 | `192.168.4.0/24` | Gi0/0.40 (`192.168.4.1`) | `BUSINESS-POOL` |
+| **Main Campus** | E&C | VLAN 50 | `192.168.5.0/24` | Gi0/0.50 (`192.168.5.1`) | `E&C-POOL` |
+| **Main Campus** | A&D | VLAN 60 | `192.168.6.0/24` | Gi0/0.60 (`192.168.6.1`) | `A&D-POOL` |
+| **Main Campus** | M-STUD-LAB | VLAN 70 | `192.168.7.0/24` | Gi0/0.70 (`192.168.7.1`) | `M_STUD_LAB-POOL` |
+| **Main Campus** | IT-DEPT | VLAN 80 | `192.168.8.0/24` | Gi0/0.80 (`192.168.8.1`) | `IT-POOL` |
+| **Branch Campus** | STAFF | VLAN 90 | `192.168.9.0/24` | Gi0/0.90 (`192.168.9.1`) | `STAFF-POOL` |
+| **Branch Campus** | B-STUD-LAB | VLAN 100 | `192.168.10.0/24` | Gi0/0.100 (`192.168.10.1`) | `B_STUD_LAB-POOL` |
 
-## Point-to-Point WAN Links & Cloud DMZ
+### Point-to-Point WAN Links & Cloud DMZ
 
-Link Connection,Subnet / CIDR,Device A Interface,Device B Interface,Clock Rate (DCE)
-MAIN-ROUTER ↔ BRANCH-ROUTER,10.10.10.0/30,Main (Se0/3/1),Branch (Se0/3/0),64000 (MAIN)
-MAIN-ROUTER ↔ CLOUD-ROUTER,10.10.10.4/30,Main (Se0/3/0),Cloud (Se0/3/0),64000 (CLOUD)
-CLOUD-ROUTER ↔ EMAIL-SERVER,20.0.0.0/30,Cloud (Gi0/0),Server (20.0.0.2),N/A
+| Link Connection | Subnet / CIDR | Device A Interface | Device B Interface | Clock Rate (DCE) |
+| :--- | :--- | :--- | :--- | :--- |
+| **MAIN-ROUTER ↔ BRANCH-ROUTER** | `10.10.10.0/30` | Main (`Se0/3/1`) | Branch (`Se0/3/0`) | 64000 (`MAIN`) |
+| **MAIN-ROUTER ↔ CLOUD-ROUTER** | `10.10.10.4/30` | Main (`Se0/3/0`) | Cloud (`Se0/3/0`) | 64000 (`CLOUD`) |
+| **CLOUD-ROUTER ↔ EMAIL-SERVER** | `20.0.0.0/30` | Cloud (`Gi0/0`) | Server (`20.0.0.2`) | N/A |
+
+---
 
 ## Core Configuration Highlights
 1. Main Campus Router (DHCP, ROAS & RIPv2 Setup)
